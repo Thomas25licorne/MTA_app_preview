@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NYC Subway Selector</title>
+    <style>
+        body { font-family: sans-serif; background: #222; color: white; text-align: center; padding: 50px; }
+        .box { background: #333; max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 10px; }
+        select { padding: 10px; font-size: 1.2em; width: 80%; margin-bottom: 20px; }
+        button { padding: 10px 20px; font-size: 1.2em; background: #007bff; color: white; border: none; cursor: pointer; }
+        .result { margin-top: 20px; padding: 20px; background: #444; border: 1px solid #666; }
+        .big-id { font-size: 3em; font-weight: bold; color: #ffcc00; }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h1>Global Transit Engine</h1>
+        <p>Select a station to find its Real-Time ID</p>
+
+        <form method="POST">
+            <select name="station_id" required>
+                <option value="" disabled selected>Search stations...</option>
+                {% for station in stations %}
+                    <option value="{{ station.stop_id }}">{{ station.stop_name }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <button type="submit">Get ID</button>
+        </form>
+
+        {% if selected %}
+        <div class="result">
+            <h2>{{ selected.stop_name }}</h2>
+            <p>The correct GTFS ID is:</p>
+            <div class="big-id">{{ selected.stop_id }}</div>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

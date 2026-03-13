@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ route_id }} Direction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #fff; text-align: center; padding: 20px; margin: 0; }
+        .container { max-width: 500px; margin: 0 auto; }
+        
+        .header { 
+            padding: 30px; border-radius: 12px; margin-bottom: 30px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1 { margin: 0; font-size: 3em; }
+        p { margin: 10px 0 0; opacity: 0.9; font-size: 1.1em; }
+
+        .dir-btn {
+            display: block; padding: 25px; margin: 15px 0;
+            background: #f8f9fa; border: 2px solid #e9ecef;
+            border-radius: 12px; text-decoration: none;
+            color: #333; font-size: 1.3em; font-weight: bold;
+            transition: background 0.2s;
+        }
+        .dir-btn:hover { background: #e2e6ea; border-color: #dbe2e8; }
+        
+        .sub-text { display: block; font-size: 0.7em; color: #666; font-weight: normal; margin-top: 5px; }
+        
+        .back-link { display: inline-block; margin-top: 30px; color: #666; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header" style="background-color: #{{ color }}; color: #{{ text_color }};">
+            <h1>{{ route_id }}</h1>
+            <p>Select Direction</p>
+        </div>
+
+        {% for d in directions %}
+        <a href="{{ url_for('menu_stops', route_id=route_id, direction_id=d.id) }}" class="dir-btn">
+            {{ d.destination }}
+            <span class="sub-text">{{ d.stop_count }} stops</span>
+        </a>
+        {% endfor %}
+        
+        <br>
+        <a href="/" class="back-link">← Choose Different Route</a>
+    </div>
+</body>
+</html>
